@@ -1,18 +1,24 @@
 / {
     chosen {
-        zmk,display = &oled;
+        zmk,display = &sh1106;
     };
 };
 
 &pro_micro_i2c {
     status = "okay";
 
-    oled: sh1106@3c {
+    /* Varsayılan oled tanımıyla çakışmaması için onu devre dışı bırakıyoruz */
+    oled: ssd1306@3c {
+        status = "disabled";
+    };
+
+    /* Sizin ekranınızı buraya sh1106 etiketiyle tanımlıyoruz */
+    sh1106: sh1106@3c {
         compatible = "sinowealth,sh1106";
         reg = <0x3c>;
         width = <128>;
         height = <64>;
-        segment-offset = <2>; 
+        segment-offset = <2>;
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <63>;
