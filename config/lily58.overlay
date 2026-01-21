@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 / {
     chosen {
         zmk,display = &oled;
@@ -7,21 +13,26 @@
 &pro_micro_i2c {
     status = "okay";
 
-    /* Önce varsayılan Lily58 OLED düğümünü siliyoruz */
+    /* Varsayılan Lily58 OLED düğümünü siliyoruz */
     /delete-node/ ssd1306@3c;
 
-    /* Şimdi kendi SH1106 ekranımızı aynı adrese tanımlıyoruz */
+    /* Kendi SH1106 ekranımızı tanımlıyoruz */
     oled: sh1106@3c {
         compatible = "sinowealth,sh1106";
         reg = <0x3c>;
         width = <128>;
         height = <64>;
-        segment-offset = <2>;
-        page-offset = <0>;
         display-offset = <0>;
+        page-offset = <0>;
+        /* Görüntü kayması sorunları için bu değeri 0, 2 veya 4 olarak deneyin.
+           Genellikle sorun bu satırdan kaynaklanır. */
+        segment-offset = <0>;
         multiplex-ratio = <63>;
-        segment-remap;
+        /* Görüntüyü dikey olarak çevirir. Gerekirse kaldırın. */
         com-invdir;
+        /* Görüntüyü yatay olarak çevirir. Gerekirse kaldırın. */
+        segment-remap;
         prechargep = <0x22>;
+        label = "DISPLAY";
     };
 };
