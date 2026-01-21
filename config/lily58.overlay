@@ -13,26 +13,22 @@
 &pro_micro_i2c {
     status = "okay";
 
-    /* Varsayılan Lily58 OLED düğümünü siliyoruz */
     /delete-node/ ssd1306@3c;
 
-    /* Kendi SH1106 ekranımızı tanımlıyoruz */
     oled: sh1106@3c {
-        compatible = "sinowealth,sh1106";
+        /* Uyumluluğu 'ssd1306fb' olarak değiştiriyoruz. Bu en önemli değişiklik. */
+        compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
         height = <64>;
-        display-offset = <0>;
+        segment-offset = <2>; /* SH1106 için genellikle 2 veya 0 gerekir. Önce 2 ile deneyelim. */
         page-offset = <0>;
-        /* Görüntü kayması sorunları için bu değeri 0, 2 veya 4 olarak deneyin.
-           Genellikle sorun bu satırdan kaynaklanır. */
-        segment-offset = <0>;
+        display-offset = <0>;
         multiplex-ratio = <63>;
-        /* Görüntüyü dikey olarak çevirir. Gerekirse kaldırın. */
         com-invdir;
-        /* Görüntüyü yatay olarak çevirir. Gerekirse kaldırın. */
         segment-remap;
         prechargep = <0x22>;
         label = "DISPLAY";
     };
 };
+
