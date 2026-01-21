@@ -17,12 +17,12 @@
         height = <64>;
 
         segment-offset = <2>;
+        display-offset = <2>;   /* 🔴 KRİTİK SATIR */
         page-offset = <0>;
-        display-offset = <0>;
 
         multiplex-ratio = <63>;
+        prechargep = <0x22>;
 
-        prechargep = <0x22>;  
         com-invdir;
         segment-remap;
 
