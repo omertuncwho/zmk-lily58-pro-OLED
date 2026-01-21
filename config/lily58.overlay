@@ -13,24 +13,21 @@
 &pro_micro_i2c {
     status = "okay";
 
+    /* Eski ssd1306 tanımını tamamen temizliyoruz */
     /delete-node/ ssd1306@3c;
 
     oled: sh1106@3c {
-        compatible = "solomon,ssd1306fb";
+        /* KRİTİK: compatible değerini SH1106 yapmalıyız */
+        compatible = "sinowealth,sh1106";
         reg = <0x3c>;
         width = <128>;
-        /* 
-         * Bu satır, SH1106 bellek adresleme sorunlarını çözmek için
-         * toplulukta kullanılan bir yöntemdir. Ekran fiziksel olarak 64px
-         * olsa da, sürücüyü 128px olarak ayarlamak adreslemeyi düzeltebilir.
-         */
-        height = <128>; 
+        height = <64>;  /* 128px denemesini iptal edip gerçek değerini yazıyoruz */
         segment-offset = <2>;
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <63>;
-        com-invdir;
         segment-remap;
+        com-invdir;
         prechargep = <0x22>;
         label = "DISPLAY";
     };
