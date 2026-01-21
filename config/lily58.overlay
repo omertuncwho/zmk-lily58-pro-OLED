@@ -10,18 +10,19 @@
     /delete-node/ ssd1306@3c;
 
     oled: sh1106@3c {
-        compatible = "solomon,ssd1306fb"; /* ZMK zorunlu */
+        compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
 
         width = <128>;
-        height = <64>;     
+        height = <64>;
 
-        segment-offset = <2>; /* SH1106 için şart */
+        segment-offset = <2>;
         page-offset = <0>;
         display-offset = <0>;
 
         multiplex-ratio = <63>;
 
+        prechargep = <0x22>;  
         com-invdir;
         segment-remap;
 
