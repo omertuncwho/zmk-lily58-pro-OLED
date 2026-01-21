@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2021 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 / {
     chosen {
         zmk,display = &oled;
@@ -13,22 +7,24 @@
 &pro_micro_i2c {
     status = "okay";
 
-    /* Eski ssd1306 tanımını tamamen temizliyoruz */
     /delete-node/ ssd1306@3c;
 
     oled: sh1106@3c {
-        /* KRİTİK: compatible değerini SH1106 yapmalıyız */
-        compatible = "sinowealth,sh1106";
+        compatible = "solomon,ssd1306fb"; /* ZMK zorunlu */
         reg = <0x3c>;
+
         width = <128>;
-        height = <64>;  /* 128px denemesini iptal edip gerçek değerini yazıyoruz */
-        segment-offset = <2>;
+        height = <64>;     
+
+        segment-offset = <2>; /* SH1106 için şart */
         page-offset = <0>;
         display-offset = <0>;
+
         multiplex-ratio = <63>;
-        segment-remap;
+
         com-invdir;
-        prechargep = <0x22>;
+        segment-remap;
+
         label = "DISPLAY";
     };
 };
