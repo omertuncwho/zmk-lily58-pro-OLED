@@ -19,9 +19,13 @@
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;
-        /* Bu değeri 2'den 0'a değiştiriyoruz. Bu son denememiz olabilir. */
-        segment-offset = <0>;
+        /* 
+         * Bu satır, SH1106 bellek adresleme sorunlarını çözmek için
+         * toplulukta kullanılan bir yöntemdir. Ekran fiziksel olarak 64px
+         * olsa da, sürücüyü 128px olarak ayarlamak adreslemeyi düzeltebilir.
+         */
+        height = <128>; 
+        segment-offset = <2>;
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <63>;
@@ -31,4 +35,3 @@
         label = "DISPLAY";
     };
 };
-
